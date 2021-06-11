@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ include file = "BootstrapCDN.jsp" %>
-       <%@ page import = "java.sql.Connection" %>
-        <%@ page import = "java.sql.PreparedStatement" %>
-        <%@ page import = "java.sql.ResultSet" %>
-         <%@ page import = "configure.DBConnect" %>
-
     <%@ include file="BootstrapCDN.jsp" %>
     <%@ page import="java.sql.*,configure.DBConnect, storage.DBData" %>
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -37,7 +31,7 @@ String email = (String) session.getAttribute("email");
 					</ul>
 					
 					<ul class="nav navbasr-nav navbar-right">
-						<li><a href="LogoutHandler.jsp"><button class="btn btn-danger navbar-btn">Logout</button></a></li>
+						<li><a href="LogoutHander.jsp"><button class="btn btn-danger navbar-btn">Logout</button></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -54,8 +48,20 @@ String email = (String) session.getAttribute("email");
 	</div>
 	<div class=row>
 		<!-- Live Bidding -->
-		<div class="col-md-6"></div>
-		<div class="col-md-6"></div>
+		<div class="col-md-6">
+		<!-- Product Information -->
+			<jsp:include page="LiveAuction.jsp">
+				<jsp:param name="b_id" value="<%=b_id %>"/>
+			
+			</jsp:include>
+		</div>
+		<div class="col-md-6">
+		<!-- Auction Input and LIve Report -->
+			<jsp:include page="TakeBid.jsp">
+				<jsp:param name="b_id" value="<%=b_id %>"/>
+			
+			</jsp:include>
+		</div>
 	</div>
 	<div class=row>
 		<div class="col-md-4">

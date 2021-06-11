@@ -1,15 +1,14 @@
-
 package storage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.bean.ProductBean;
-import configure.DBConnect;
 
-//import com.configure.DBConnect;
+import configure.DBConnect;
 
 public class ProductData {
 
@@ -61,13 +60,15 @@ public class ProductData {
 		try
 		{
 			Connection con = DBConnect.takeConnection();
-			String query = "select product_id from new_auction";
-			PreparedStatement ps = con.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
+			String query = "select * from new_auction";
+			Statement ps = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			ResultSet rs = ps.executeQuery(query);
 			if(rs.last())
 			{
-				id = rs.getInt(1);
+				id = rs.getInt("product_id");
+				
 			}
+			updateLiveAuction(id);
 			con.close();
 		}
 		catch(Exception e)
@@ -76,6 +77,29 @@ public class ProductData {
 		}
 		return id;
 	}
+	
+	public static void updateLiveAuction(int p_id)
+	{
+	
+		try
+		{
+			Connection con = DBConnect.takeConnection();
+			String query = "Insert into current_auction(current_price,b_id,product_id) select initial_price,b_id,product_id from new_auction where product_id=?";
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, p_id);
+			ps.executeUpdate();
+			
+			con.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 	
 	public static ArrayList<ArrayList<String>> getAllRecords(int bid)
 	{

@@ -14,7 +14,7 @@
 	{
 		out.println("<tr>");
 		out.println("<td>"+b.get(0)+"</td>");
-		out.println("<td>"+b.get(1)+"</td>");
+		//out.println("<td>"+b.get(1)+"</td>");
 		out.println("<td>"+b.get(2)+"</td>");
 		out.println("<td>"+b.get(4)+"</td>");
 		out.println("<td>"+b.get(5)+"</td>");

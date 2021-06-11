@@ -22,7 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet("/UploadServlet")
 public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY="C:/project/auctionproject/src/main/webapp/product_img"; 
+	private static final String UPLOAD_DIRECTORY="D:/p1/auctionProj/web/product_img"; 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
